@@ -6,9 +6,11 @@ import android.os.Binder;
 import android.os.IBinder;
 
 public class RequestHandlerService extends Service {
+
+
+    //region Binder methods
     //Binder to give to the clients
     private final IBinder binder = new LocalBinder();
-
     /**
      * Class used for the client Binder.  Because we know this service always
      * runs in the same process as its clients, we don't need to deal with IPC.
@@ -24,4 +26,5 @@ public class RequestHandlerService extends Service {
             return RequestHandlerService.this;
         }
     }
+    //endregion
 }
