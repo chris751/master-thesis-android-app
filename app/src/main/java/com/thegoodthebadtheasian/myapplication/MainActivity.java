@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -25,7 +27,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MyAdapter.OnItemClickListener {
     RequestHandlerService mService;
     boolean mBound = false;
 
@@ -37,9 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     RetrofitClient client;
 
-    String[] myDataset = {"yo", "yo", "yo"};
     List<PlaceholderDevice> devices;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +57,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        setupRecyclerView();
-
         client = RetrofitServiceProvider.provideService(RetrofitClient.class);
 
         getAllDevices();
-
     }
 
     private void getAllDevices(){
@@ -72,11 +69,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<PlaceholderDevice>> call, Response<List<PlaceholderDevice>> response) {
                 devices = response.body();
+                setupRecyclerView();
             }
 
             @Override
             public void onFailure(Call<List<PlaceholderDevice>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "something went wrong", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "something went wrong", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -105,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         layoutMananger = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutMananger);
 
-        mAdapter = new MyAdapter(myDataset);
+        mAdapter = new MyAdapter(this, devices, this);
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -128,4 +126,12 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 //endregion
+
+    @Override
+    public void onItemClick(int position) {
+        // Start activity på baggrund af den valgte ting.. Position giver hvilket item. Det må så være på baggrund af det, vi har til at ligge her i aktiviten og ikke i viewet
+        Log.d("ITEM CLICk", "onItemClick: " + position);
+        Intent intent = new Intent(this, DeviceDetailsActivity.class);
+        startActivity(intent);
+    }
 }
