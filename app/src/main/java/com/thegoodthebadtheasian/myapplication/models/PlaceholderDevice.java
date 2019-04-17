@@ -1,6 +1,8 @@
 package com.thegoodthebadtheasian.myapplication.models;
 
-public class PlaceholderDevice {
+import java.io.Serializable;
+
+public class PlaceholderDevice implements Serializable {
 
     private String _id;
     private int price = 001;

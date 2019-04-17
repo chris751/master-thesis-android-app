@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.thegoodthebadtheasian.myapplication.models.PlaceholderDevice;
 
@@ -29,7 +28,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         public MyViewHolder(View v, OnItemClickListener onItemClickListener){
             super(v);
             nameView = itemView.findViewById(R.id.name_view);
-            priceView = itemView.findViewById(R.id.price_view);
+            priceView = itemView.findViewById(R.id.priceView);
             parentLayout = itemView.findViewById(R.id.parent_layout);
 
             this.onItemClickListener = onItemClickListener;

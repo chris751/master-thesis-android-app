@@ -28,6 +28,8 @@ import retrofit2.Response;
 
 
 public class MainActivity extends AppCompatActivity implements MyAdapter.OnItemClickListener {
+    public static final String DEVICE_EXTRAS = "DEVICE_EXTRAS";
+
     RequestHandlerService mService;
     boolean mBound = false;
 
@@ -132,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnItemC
         // Start activity på baggrund af den valgte ting.. Position giver hvilket item. Det må så være på baggrund af det, vi har til at ligge her i aktiviten og ikke i viewet
         Log.d("ITEM CLICk", "onItemClick: " + position);
         Intent intent = new Intent(this, DeviceDetailsActivity.class);
+        intent.putExtra(DEVICE_EXTRAS, devices.get(position));
         startActivity(intent);
     }
 }
