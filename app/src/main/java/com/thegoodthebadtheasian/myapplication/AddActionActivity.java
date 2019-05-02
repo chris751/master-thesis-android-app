@@ -6,51 +6,54 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.thegoodthebadtheasian.myapplication.Adapters.ActionListAdapter;
 import com.thegoodthebadtheasian.myapplication.models.Action;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class AddActionActivity extends AppCompatActivity implements ActionListAdapter.OnItemClickListener{
+public class AddActionActivity extends AppCompatActivity{
 
     public static final int PICK_ACTION_REQUEST = 1;
+    public static final String ACTION_TYPE_EXTRA = "ACTION_TYPE_EXTRA";
+    public static final int SMS_ACTION = 0;
+    public static final int GA_ACTION = 1;
+    public static final int NOTIFICATION_ACTION = 2;
 
-    private ArrayList<Action> actions;
-
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
+    private Button smsActionBtn;
+    private Button gaActionBtn;
+    private Button notificationBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_action);
 
-        deleteThisMethodAtSomePoint();
+        smsActionBtn = findViewById(R.id.smsActionBtn);
+        gaActionBtn = findViewById(R.id.gaActionBtn);
+        notificationBtn = findViewById(R.id.notificationActionBtn);
 
-        setupRecyclerView();
-    }
-
-    private void setupRecyclerView() {
-        recyclerView = findViewById(R.id.actionListView);
-
-        recyclerView.setHasFixedSize(true);
-
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        mAdapter = new ActionListAdapter(this, actions, this);
-        recyclerView.setAdapter(mAdapter);
-    }
-
-
-    @Override
-    public void onItemClick(int position) {
-        Toast.makeText(this, "SUCK BANANA", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, ActionDetailsActivity.class);
-        startActivityForResult(intent, PICK_ACTION_REQUEST);
+        smsActionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToActionDetailsActivity(SMS_ACTION);
+            }
+        });
+        gaActionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToActionDetailsActivity(GA_ACTION);
+            }
+        });
+        notificationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToActionDetailsActivity(NOTIFICATION_ACTION);
+            }
+        });
     }
 
     @Override
@@ -64,11 +67,9 @@ public class AddActionActivity extends AppCompatActivity implements ActionListAd
         }
     }
 
-    private void deleteThisMethodAtSomePoint(){
-        Action newAction = new Action("1234", "GA");
-        ArrayList<Action> tempList = new ArrayList<Action>();
-        tempList.add(newAction);
-
-        actions = tempList;
+    private void goToActionDetailsActivity(int actionType){
+        Intent intent = new Intent(this, ActionDetailsActivity.class);
+        intent.putExtra(ACTION_TYPE_EXTRA, actionType);
+        startActivityForResult(intent, PICK_ACTION_REQUEST);
     }
 }

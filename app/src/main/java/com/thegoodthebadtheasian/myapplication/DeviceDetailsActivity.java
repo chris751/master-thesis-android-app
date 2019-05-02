@@ -9,11 +9,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.thegoodthebadtheasian.myapplication.models.Device;
 import com.thegoodthebadtheasian.myapplication.models.PlaceholderDevice;
 
 public class DeviceDetailsActivity extends AppCompatActivity {
 
-    private PlaceholderDevice mDevice;
+    private Device mDevice;
 
     private TextView nameView;
     private TextView priceView;
@@ -24,14 +25,14 @@ public class DeviceDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_details);
 
-        mDevice = (PlaceholderDevice) getIntent().getSerializableExtra(MainActivity.DEVICE_EXTRAS);
+        mDevice = (Device) getIntent().getSerializableExtra(MainActivity.DEVICE_EXTRAS);
 
         nameView = findViewById(R.id.nameView);
         priceView = findViewById(R.id.priceView);
         floatingActionButton = findViewById(R.id.floatingActionButton);
 
-        nameView.setText(mDevice.getName());
-        priceView.setText(mDevice.getPrice()+"");
+        nameView.setText(mDevice.get_id());
+        priceView.setText(mDevice.getTrigger()+"");
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

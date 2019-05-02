@@ -1,4 +1,4 @@
-package com.thegoodthebadtheasian.myapplication;
+package com.thegoodthebadtheasian.myapplication.Adapters;
 
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
@@ -8,18 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.thegoodthebadtheasian.myapplication.R;
 import com.thegoodthebadtheasian.myapplication.models.Action;
 
 import java.util.List;
 
-class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.ViewHolder>{
+public class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.ViewHolder>{
     private List<Action> mActions;
-    private Context mContext;
     private OnItemClickListener mOnItemClickListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView nameView;
-        public ConstraintLayout parentLayout;
 
         OnItemClickListener onItemClickListener;
 
@@ -38,8 +37,7 @@ class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.ViewHolde
         }
     }
 
-    public ActionListAdapter(Context context, List<Action> actions, OnItemClickListener onItemClickListener){
-        this.mContext = context;
+    public ActionListAdapter(List<Action> actions, OnItemClickListener onItemClickListener){
         mActions = actions;
 
         mOnItemClickListener = onItemClickListener;
@@ -56,7 +54,7 @@ class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.ViewHolde
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Action action = mActions.get(position);
-        holder.nameView.setText(action.getName());
+        //holder.nameView.setText(action.getName());
     }
 
     @Override

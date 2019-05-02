@@ -5,18 +5,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.thegoodthebadtheasian.myapplication.models.PlaceholderDevice;
+import com.thegoodthebadtheasian.myapplication.Adapters.MyAdapter;
+import com.thegoodthebadtheasian.myapplication.models.Device;
 import com.thegoodthebadtheasian.myapplication.retrofit.RetrofitClient;
 import com.thegoodthebadtheasian.myapplication.retrofit.RetrofitServiceProvider;
 
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnItemC
 
     RetrofitClient client;
 
-    List<PlaceholderDevice> devices;
+    List<Device> devices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,18 +64,20 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnItemC
     }
 
     private void getAllDevices(){
-        Call<List<PlaceholderDevice>> call = client.getDevices();
+        Call<List<Device>> call = client.getDevices();
 
-        call.enqueue(new Callback<List<PlaceholderDevice>>() {
+        call.enqueue(new Callback<List<Device>>() {
             @Override
-            public void onResponse(Call<List<PlaceholderDevice>> call, Response<List<PlaceholderDevice>> response) {
+            public void onResponse(Call<List<Device>> call, Response<List<Device>> response) {
                 devices = response.body();
+                Log.d("Devices", devices.toString());
                 setupRecyclerView();
             }
 
             @Override
-            public void onFailure(Call<List<PlaceholderDevice>> call, Throwable t) {
+            public void onFailure(Call<List<Device>> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "something went wrong", Toast.LENGTH_SHORT).show();
+                Log.d("Devices", t.toString());
             }
         });
     }
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnItemC
         layoutMananger = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutMananger);
 
-        mAdapter = new MyAdapter(this, devices, this);
+        mAdapter = new MyAdapter( devices, this);
         recyclerView.setAdapter(mAdapter);
     }
 

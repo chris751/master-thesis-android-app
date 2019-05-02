@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitServiceProvider {
 
-    private static final String BASE_URL = "https://radiant-wildwood-24015.herokuapp.com/";
+    private static final String BASE_URL = "https://morning-forest-88721.herokuapp.com/";
 
     private static Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(BASE_URL)

@@ -1,4 +1,4 @@
-package com.thegoodthebadtheasian.myapplication;
+package com.thegoodthebadtheasian.myapplication.Adapters;
 
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
@@ -8,13 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.thegoodthebadtheasian.myapplication.R;
+import com.thegoodthebadtheasian.myapplication.models.Device;
 import com.thegoodthebadtheasian.myapplication.models.PlaceholderDevice;
+import com.thegoodthebadtheasian.myapplication.models.Sensor;
 
 import java.util.List;
 
-class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-    private List<PlaceholderDevice> mDataset;
-    private Context mContext;
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+    private List<Device> mDataset;
     private OnItemClickListener mOnItemClickListener;
 
 
@@ -42,9 +44,8 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         }
     }
 
-    public MyAdapter(Context context ,List<PlaceholderDevice> myDataset, OnItemClickListener onItemClickListener) {
+    public MyAdapter(List<Device> myDataset, OnItemClickListener onItemClickListener) {
         mDataset = myDataset;
-        this.mContext = context;
 
         mOnItemClickListener = onItemClickListener;
     }
@@ -59,9 +60,10 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        PlaceholderDevice thisDevice = mDataset.get(position);
-        holder.nameView.setText(thisDevice.getName());
-        holder.priceView.setText(thisDevice.getPrice() + "");
+        Device thisDevice = mDataset.get(position);
+        Sensor thisSensor = thisDevice.getTrigger().getSensors().get(0);
+        holder.nameView.setText(thisSensor.getType());
+        holder.priceView.setText(thisDevice.getAction().get_id());
     }
 
     @Override
