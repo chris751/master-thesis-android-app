@@ -9,17 +9,17 @@ import java.io.Serializable;
 public class Action implements Serializable {
 
     private String _id;
-    private GoogleAnalytics ga;
+    private GoogleAnalytics googleAnalytics;
     private SMS sms;
-    private Notification notication;
+    private Notification notification;
 
 
-    public GoogleAnalytics getGa() {
-        return ga;
+    public GoogleAnalytics getGoogleAnalytics() {
+        return googleAnalytics;
     }
 
-    public void setGa(GoogleAnalytics ga) {
-        this.ga = ga;
+    public void setGoogleAnalytics(GoogleAnalytics googleAnalytics) {
+        this.googleAnalytics = googleAnalytics;
 
     }
     public SMS getSms() {
@@ -30,12 +30,12 @@ public class Action implements Serializable {
         this.sms = sms;
     }
 
-    public Notification getNotication() {
-        return notication;
+    public Notification getNotification() {
+        return notification;
     }
 
-    public void setNotication(Notification notication) {
-        this.notication = notication;
+    public void setNotification(Notification notification) {
+        this.notification = notification;
     }
 
     public String get_id() {

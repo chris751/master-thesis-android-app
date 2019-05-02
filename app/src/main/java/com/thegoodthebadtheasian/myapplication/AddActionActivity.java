@@ -23,6 +23,8 @@ public class AddActionActivity extends AppCompatActivity{
     public static final int GA_ACTION = 1;
     public static final int NOTIFICATION_ACTION = 2;
 
+    private Action mAction;
+
     private Button smsActionBtn;
     private Button gaActionBtn;
     private Button notificationBtn;
@@ -31,6 +33,8 @@ public class AddActionActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_action);
+
+        mAction = (Action) getIntent().getSerializableExtra(DeviceDetailsActivity.ACTION_EXTRA);
 
         smsActionBtn = findViewById(R.id.smsActionBtn);
         gaActionBtn = findViewById(R.id.gaActionBtn);
@@ -70,6 +74,7 @@ public class AddActionActivity extends AppCompatActivity{
     private void goToActionDetailsActivity(int actionType){
         Intent intent = new Intent(this, ActionDetailsActivity.class);
         intent.putExtra(ACTION_TYPE_EXTRA, actionType);
+        intent.putExtra(DeviceDetailsActivity.ACTION_EXTRA, mAction);
         startActivityForResult(intent, PICK_ACTION_REQUEST);
     }
 }

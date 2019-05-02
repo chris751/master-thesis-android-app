@@ -10,6 +10,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface RetrofitClient {
@@ -27,4 +28,7 @@ public interface RetrofitClient {
 
     @DELETE(DEVICE_END_POINT + "/{id}")
     Call<Void> deleteDevice(@Path("id") String id);
+
+    @PUT(DEVICE_END_POINT + "/{id}")
+    Call<Device> addAction(@Path("id") String id, @Body Device Device);
 }
