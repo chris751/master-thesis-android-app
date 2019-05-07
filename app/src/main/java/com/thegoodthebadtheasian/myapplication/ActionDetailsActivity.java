@@ -63,9 +63,11 @@ public class ActionDetailsActivity extends AppCompatActivity {
 
     private Action getSmsResult(){
         TextView phoneNumberInput = findViewById(R.id.phoneNumberInput);
+        TextView messageInput = findViewById(R.id.messageInput);
 
         SMS smsResult = new SMS();
         smsResult.setPhoneNumber(phoneNumberInput.getText()+"");
+        smsResult.setMessage(messageInput.getText()+"");
         Action actionResult = mAction;
 
         actionResult.setSms(smsResult);
@@ -93,7 +95,7 @@ public class ActionDetailsActivity extends AppCompatActivity {
 
     private Action getNotificationResult() {
         TextView titleInput = findViewById(R.id.titleInput);
-        TextView messageInput = findViewById(R.id.messageInput);
+        TextView messageInput = findViewById(R.id.messageLabel);
         TextView valueInput = findViewById(R.id.valueInput);
 
         Notification notificationResult = new Notification();

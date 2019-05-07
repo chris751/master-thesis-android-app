@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
         android:text="Phone Number"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/actionDetailsTitleSms" />
@@ -52,4 +53,28 @@
         android:inputType="phone"
         app:layout_constraintStart_toEndOf="@+id/phoneLabelView"
         app:layout_constraintTop_toBottomOf="@+id/actionDetailsTitleSms" />
+
+    <TextView
+        android:id="@+id/messageLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Message"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneLabelView" />
+
+    <EditText
+        android:id="@+id/messageInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="46dp"
+        android:layout_marginLeft="46dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintStart_toEndOf="@+id/messageLabel"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumberInput" />
 </android.support.constraint.ConstraintLayout>

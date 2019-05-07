@@ -44,6 +44,22 @@ public class DeviceDetailsActivity extends AppCompatActivity {
         floatingActionButton = findViewById(R.id.floatingActionButton);
 
         updateInfo();
+        showCurrentActions();
+    }
+
+    private void showCurrentActions(){
+        Action actions = mDevice.getAction();
+
+        if(actions.getSms() == null){
+            findViewById(R.id.smsActionWrapper).setVisibility(View.GONE);
+        }
+        if(actions.getGoogleAnalytics() == null) {
+            findViewById(R.id.gaActionWrapper).setVisibility(View.GONE);
+
+        }
+        if(actions.getNotification() == null) {
+            findViewById(R.id.notificationActionWrapper).setVisibility(View.GONE);
+        }
     }
 
     private void updateInfo(){

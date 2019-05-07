@@ -4,27 +4,45 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
+import android.util.Log;
+import android.widget.Toast;
 
-public class RequestHandlerService extends Service {
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.messaging.RemoteMessage;
+
+import static android.content.ContentValues.TAG;
+
+public class RequestHandlerService extends FirebaseMessagingService {
+
+    @Override
+    public void onMessageReceived (RemoteMessage message){
+        message.getNotification();
+
+        //Vis notification til når appen er i forgrunden
+    }
 
 
-    //region Binder methods
-    //Binder to give to the clients
-    private final IBinder binder = new LocalBinder();
     /**
-     * Class used for the client Binder.  Because we know this service always
-     * runs in the same process as its clients, we don't need to deal with IPC.
+     * Called if InstanceID token is updated. This may occur if the security of
+     * the previous token had been compromised. Note that this is called when the InstanceID token
+     * is initially generated so this is where you would retrieve the token.
      */
     @Override
-    public IBinder onBind(Intent intent) {
-        return binder;
-    }
+    public void onNewToken(String token) {
+        Log.d(TAG, "Refreshed token: " + token);
 
-    public class LocalBinder extends Binder {
-        RequestHandlerService getService(){
-            //Return the instance of this service, so the client can call methods from the service
-            return RequestHandlerService.this;
-        }
+        // If you want to send messages to this application instance or
+        // manage this apps subscriptions on the server side, send the
+        // Instance ID token to your app server.
+
+        /*
+        * Her bør vi som navnet antyder sende Token til serveren
+        * */
+        //sendRegistrationToServer(token);
     }
-    //endregion
 }
