@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">ThesisAndroidProject</string>
+
+    <string name="hall_effect_sensor_name">Door sensor</string>
+    <string name="hall_effect_info">This sensor triggers when the two bricks are pulled apart</string>
+
+    <string name="pir_sensor_name">Motion sensor</string>
+    <string name="pir_sensor_info">This sensor triggers when something moves in the detection area</string>
+
+    <string name="timer_module_name">Timer module</string>
+    <string name="timer_module_info">This condition module can be used to trigger after set amount of time</string>
+
 </resources>

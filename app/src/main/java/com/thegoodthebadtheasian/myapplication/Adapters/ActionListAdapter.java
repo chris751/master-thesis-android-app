@@ -1,7 +1,5 @@
 package com.thegoodthebadtheasian.myapplication.Adapters;
 
-import android.content.Context;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +22,7 @@ public class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.Vi
 
         public ViewHolder(View v, OnItemClickListener onItemClickListener){
             super(v);
-            nameView = itemView.findViewById(R.id.nameView);
+            nameView = itemView.findViewById(R.id.pirNameView);
 
             this.onItemClickListener = onItemClickListener;
 

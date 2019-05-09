@@ -14,6 +14,8 @@ import com.thegoodthebadtheasian.myapplication.models.actionmodels.GoogleAnalyti
 import com.thegoodthebadtheasian.myapplication.models.actionmodels.Notification;
 import com.thegoodthebadtheasian.myapplication.models.actionmodels.SMS;
 
+import org.w3c.dom.Text;
+
 public class ActionDetailsActivity extends AppCompatActivity {
 
     public static final String ACTION_DETAILS_RESULT_EXTRAS = "ACTION_DETAILS_RESULT_EXTRAS";
@@ -36,20 +38,7 @@ public class ActionDetailsActivity extends AppCompatActivity {
             Toast.makeText(this,"Something went wrong", Toast.LENGTH_SHORT);
         }
 
-        switch (actionType) {
-            case AddActionActivity.SMS_ACTION:
-                setContentView(R.layout.activity_action_details_sms);
-                break;
-            case AddActionActivity.GA_ACTION:
-                setContentView(R.layout.activity_action_details_ga);
-                break;
-            case AddActionActivity.NOTIFICATION_ACTION:
-                setContentView(R.layout.activity_action_details_notification);
-                break;
-            default:
-                return;
-        }
-
+        setupLayout(actionType);
 
         confirmBtn = findViewById(R.id.confirmBtn);
 
@@ -59,6 +48,48 @@ public class ActionDetailsActivity extends AppCompatActivity {
                 saveResultAndFinish();
             }
         });
+    }
+
+    private void setupLayout(int actionType){
+        switch (actionType) {
+            case AddActionActivity.SMS_ACTION:
+                setContentView(R.layout.activity_action_details_sms);
+                if(mAction.getSms() != null){
+                    TextView phoneNumberInput = findViewById(R.id.phoneNumberInput);
+                    phoneNumberInput.setText(mAction.getSms().getPhoneNumber());
+                    TextView messageInput = findViewById(R.id.messageInput);
+                    messageInput.setText(mAction.getSms().getMessage());
+                }
+                break;
+            case AddActionActivity.GA_ACTION:
+                setContentView(R.layout.activity_action_details_ga);
+                if(mAction.getGoogleAnalytics() != null) {
+                    TextView eventCategory = findViewById(R.id.eventCategoryInput);
+                    TextView eventAction = findViewById(R.id.eventActionInput);
+                    TextView eventLabel = findViewById(R.id.eventLabelInput);
+                    TextView eventValue = findViewById(R.id.eventValueInput);
+
+                    eventCategory.setText(mAction.getGoogleAnalytics().getEventCategory());
+                    eventAction.setText(mAction.getGoogleAnalytics().getEventAction());
+                    eventLabel.setText(mAction.getGoogleAnalytics().getEventLabel());
+                    eventValue.setText(mAction.getGoogleAnalytics().getEventValue()+"");
+                }
+                break;
+            case AddActionActivity.NOTIFICATION_ACTION:
+                setContentView(R.layout.activity_action_details_notification);
+                if(mAction.getNotification() != null){
+                    TextView title = findViewById(R.id.titleInput);
+                    TextView message = findViewById(R.id.messageInput);
+                    TextView value = findViewById(R.id.valueInput);
+
+                    title.setText(mAction.getNotification().getTitle());
+                    message.setText(mAction.getNotification().getMessage());
+                    value.setText(mAction.getNotification().getValue()+"");
+                }
+                break;
+            default:
+                return;
+        }
     }
 
     private Action getSmsResult(){

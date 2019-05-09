@@ -1,6 +1,5 @@
 package com.thegoodthebadtheasian.myapplication.Adapters;
 
-import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,7 +9,6 @@ import android.widget.TextView;
 
 import com.thegoodthebadtheasian.myapplication.R;
 import com.thegoodthebadtheasian.myapplication.models.Device;
-import com.thegoodthebadtheasian.myapplication.models.PlaceholderDevice;
 import com.thegoodthebadtheasian.myapplication.models.Sensor;
 
 import java.util.List;
@@ -30,7 +28,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         public MyViewHolder(View v, OnItemClickListener onItemClickListener){
             super(v);
             nameView = itemView.findViewById(R.id.name_view);
-            priceView = itemView.findViewById(R.id.priceView);
+            priceView = itemView.findViewById(R.id.pirInfoView);
             parentLayout = itemView.findViewById(R.id.parent_layout);
 
             this.onItemClickListener = onItemClickListener;
